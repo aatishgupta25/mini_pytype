@@ -11,29 +11,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1) Checkout your source
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # 2) Set up OCaml & OPAM
-      - name: Setup OCaml and OPAM
+      - name: Setup OCaml & OPAM
         uses: ocaml/setup-ocaml@v2
         with:
-          ocaml-version: 5.1         # or whatever version you target
-          opam-version: 2.1
-          # pin your project root so `opam install . --deps-only` works:
-          packages: .
-          # enable caching of the OPAM switch
-          cache: true
+          ocaml-compiler: 5.1      # or whatever you’ve tested locally
+          opam-repositories: default
+          opam-pin: .              # pin your project so `opam install .` works
+          opam-depext: true        # allow system-package installs if needed
+          cache: true              # cache OPAM switch between runs
 
-      # 3) Install your OCaml dependencies
       - name: Install OPAM deps
         run: opam install . --deps-only -y
 
-      # 4) Build everything
       - name: Dune build
         run: dune build --profile=release
 
-      # 5) Run your test suite
       - name: Dune runtest
         run: dune runtest
