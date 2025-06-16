@@ -1,27 +1,18 @@
-name: CI
-
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
       - name: Setup OCaml & OPAM
         uses: ocaml/setup-ocaml@v2
         with:
-          ocaml-compiler: 5.1      # or whatever you’ve tested locally
+          ocaml-compiler: 5.1
           opam-repositories: default
-          opam-pin: .              # pin your project so `opam install .` works
-          opam-depext: true        # allow system-package installs if needed
-          cache: true              # cache OPAM switch between runs
+          opam-pin: "mini-pytype=."
+          opam-depext: "true"
+          dune-cache: "true"
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install OPAM deps
         run: opam install . --deps-only -y
