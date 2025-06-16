@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1) Checkout your source
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2) Set up OCaml & OPAM
+      - name: Setup OCaml and OPAM
+        uses: ocaml/setup-ocaml@v2
+        with:
+          ocaml-version: 5.1         # or whatever version you target
+          opam-version: 2.1
+          # pin your project root so `opam install . --deps-only` works:
+          packages: .
+          # enable caching of the OPAM switch
+          cache: true
+
+      # 3) Install your OCaml dependencies
+      - name: Install OPAM deps
+        run: opam install . --deps-only -y
+
+      # 4) Build everything
+      - name: Dune build
+        run: dune build --profile=release
+
+      # 5) Run your test suite
+      - name: Dune runtest
+        run: dune runtest
