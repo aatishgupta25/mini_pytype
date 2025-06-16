@@ -1,0 +1,9 @@
+{
+  "site_package_search_strategy": "pep561",
+  "source_directories": ["."],
+
+  "shared_memory": {
+    "heap_size": 1024,             
+    "dependency_table_power": 17  
+  }
+}

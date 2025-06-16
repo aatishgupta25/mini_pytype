@@ -1,0 +1,15 @@
+;; src/dune
+
+;; 1) Library with your core modules
+(library
+ (public_name mini-pytype.lib)  ; Use the package name + .lib
+ (name mini_pytype_lib)
+ (modules Ast Json_decode Constraint_gen Unify Checker Report)
+ (libraries yojson unix))
+ 
+;; 2) Executable for the CLI
+(executable
+ (name        main)                      ; uses src/main.ml as module Main
+ (public_name mini-pytype)               ; the installed binary name `mini-pytype`
+ (modules     main Cli)                  ; only Main and Cli comprise the exe
+ (libraries   mini_pytype_lib cmdliner yojson unix))

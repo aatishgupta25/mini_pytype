@@ -1,0 +1,41 @@
+# OCaml/Dune
+_build/
+*_build/
+*.cm[ioxal]
+*.o
+*.a
+*.so
+*.cmxa
+*.cmi
+*.cmo
+*.cmt
+*.cache/
+_coverage/
+*.annot
+
+# Python
+__pycache__/
+*.py[cod]
+.env/
+.venv/
+venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Caches
+.mypy_cache/
+.pyre/
+*.mypy_cache
+*.pytest_cache/
+
+# Editor / OS
+.DS_Store
+*.swp
+*~
+.idea/
+.vscode/
+
+# Benchmarks & outputs
+metrics/benchmark_with_pyre_summary.csv
+metrics/metrics_test.csv
+*.opam
