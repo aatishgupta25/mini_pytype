@@ -13,6 +13,8 @@ _build/
 _coverage/
 *.annot
 
+.github
+
 # ignore only the .github directory under deps/
 deps/jsonschema/.github/
 deps/jsonschema/json/.github/
