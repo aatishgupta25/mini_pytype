@@ -1,4 +1,4 @@
-# mini-pytype
+# Mini PyType
 
 A minimal, OCaml‑based static type checker for Python (**subset** of PEP 484).
 
